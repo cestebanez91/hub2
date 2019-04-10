@@ -219,7 +219,7 @@
     },
 
     "variables": {
-        "baseUrl" : "https://raw.githubusercontentcom/cestebanez91/hub2/master/",
+        "baseUrl" : "https://raw.githubusercontentcom/cestebanez91/hub2/master",
         "deployNsgURL"         : "[concat(variables('baseUrl'),'/deployNsg.json')]",
         "deployVnetURL"        : "[concat(variables('baseUrl'),'/deployVnet.json')]",
         "deployLoadBalancerURL": "[concat(variables('baseUrl'),'/deployLoadBalancer.json')]",
