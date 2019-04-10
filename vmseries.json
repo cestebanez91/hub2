@@ -124,6 +124,18 @@
                 "description": "Application Gateway Backend Pool Name"
             }
         },
+        "vpnfwLbName": {
+            "type": "string",
+            "metadata": {
+                "description": "Application Gateway Name"
+            }
+        },
+        "vpnfwLbBePoolName": {
+            "type": "string",
+            "metadata": {
+                "description": "Application Gateway Backend Pool Name"
+            }
+        },
         "appInsightsName": {
             "type": "string",
             "metadata": {
