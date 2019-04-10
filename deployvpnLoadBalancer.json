@@ -38,19 +38,19 @@
 				"description": "Name of the subnet"
 			}
 		},
-		"vpnloadBalancerName": {
+		"loadBalancerName": {
 			"type": "string",
 			"metadata": {
 				"description": "Name of the inbound load balancer"
 			}
 		},
-		"vpnloadBalancerIP": {
+		"loadBalancerIP": {
 			"type": "string",
 			"metadata": {
-				"description": "IP Address of the inbound load balancer in the Trust network"
+				"description": "IP Address of the inbound load balancer in the VPN network"
 			}
 		},
-		"vpnfwLbBePoolName": {
+		"fwLbBePoolName": {
 			"type": "string",
 			"metadata": {
 				"description": "Backend pool name of the load balancer"
@@ -60,14 +60,14 @@
 
 	"variables": {
 		"vnetId": "[resourceId(parameters('virtualNetworkRG'), 'Microsoft.Network/virtualNetworks/', parameters('virtualNetworkName'))]",
-		"lbId": "[resourceId('Microsoft.Network/loadBalancers/', parameters('vpnloadBalancerName'))]"
+		"lbId": "[resourceId('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))]"
 	},
 
 	"resources": [
 		{
 			"apiVersion": "2017-08-01",
 			"type": "Microsoft.Network/loadBalancers",
-			"name": "[parameters('vpnloadBalancerName')]",
+			"name": "[parameters('loadBalancerName')]",
 			"location": "[parameters('location')]",
             "tags": {
                 "PanoramaManaged": "no"
@@ -85,13 +85,13 @@
 								"id": "[concat(variables('vnetId'),'/subnets/',parameters ('subnetName'))]"
 							},
 							"privateIPAllocationMethod": "Static",
-							"privateIPAddress": "[parameters('vpnloadBalancerIP')]"
+							"privateIPAddress": "[parameters('loadBalancerIP')]"
 						}
 					}
 				],
 				"backendAddressPools": [
 					{
-						"name": "[parameters('vpnfwLbBePoolName')]"
+						"name": "[parameters('fwLbBePoolName')]"
 					}
 				],
 				"loadBalancingRules": [
@@ -101,7 +101,7 @@
 								"id": "[concat(variables('lbId'), '/frontendIpConfigurations/Frontend')]"
 							},
 							"backendAddressPool": {
-								"id": "[concat(variables('lbId'), '/backendAddressPools/', parameters('vpnfwLbBePoolName'))]"
+								"id": "[concat(variables('lbId'), '/backendAddressPools/', parameters('fwLbBePoolName'))]"
 							},
 							"probe": {
 								"id": "[concat(variables('lbId'), '/probes/lbprobe')]"
@@ -132,7 +132,7 @@
 	],
 	"outputs" : {
 		"LoadBalancerFrontEndIp": {
-			"value": "[reference(concat('Microsoft.Network/loadBalancers/', parameters('vpnloadBalancerName'))).frontendIPConfigurations[0].properties.privateIPAddress ]",
+			"value": "[reference(concat('Microsoft.Network/loadBalancers/', parameters('loadBalancerName'))).frontendIPConfigurations[0].properties.privateIPAddress ]",
 			"type" : "string"
 		}
 	}
