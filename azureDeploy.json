@@ -239,11 +239,9 @@
         "fwLbBePoolName": "[concat(variables('rgname'), '_inbound_hub_fw_lb_backend_pool_', variables('namingInfix'))]",
         "appInsightsName": "[concat(variables('rgname'), '-appinsights-', variables('namingInfix'))]",
         "loadBalancerName": "[concat(variables('rgname'), '-outbound-lb' )]",
-
         "vpnfwLbName": "[concat(variables('rgname'), '_vpn_hub_fw_lb_', variables('namingInfix'))]",
         "vpnfwLbBePoolName": "[concat(variables('rgname'), '_vpn_hub_fw_lb_backend_pool_', variables('namingInfix'))]",
         "vpnloadBalancerName": "[concat(variables('rgname'), '-vpn-lb' )]",
-
         "MgmtSubnetName" : "[concat(parameters('virtualNetworkName'), '-mgmt-subnet')]",
         "untrustedSubnetName" : "[concat(parameters('virtualNetworkName'), '-untrust-subnet')]",
         "trustedSubnetName" : "[concat(parameters('virtualNetworkName'), '-trust-subnet')]",
@@ -454,13 +452,13 @@
                     "subnetName": {
                         "value": "[variables('vpnSubnetName')]"
                     },
-                    "vpnloadBalancerName": {
+                    "loadBalancerName": {
                         "value": "[variables('vpnloadBalancerName')]"
                     },
-                    "vpnloadBalancerIP": {
+                    "loadBalancerIP": {
                         "value": "[parameters('vpnloadBalancerIP')]"
                     },
-                    "vpnfwLbBePoolName": {
+                    "fwLbBePoolName": {
                         "value": "[variables('vpnfwLbBePoolName')]"
                     }
                 }
